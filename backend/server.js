@@ -14,8 +14,21 @@ import orderRouter from './routes/orderRoutes.js'
 //app config
 const app = express()
 const port = process.env.PORT || 4000
-connectdb()
-connectcloudinary()
+const connectDBWithRetry = async () => {
+  try {
+    await connectdb();
+  } catch (error) {
+    console.error("MongoDB connection failed:", error.message);
+  }
+};
+connectDBWithRetry();
+
+try {
+  connectcloudinary();
+} catch (error) {
+  console.error("Cloudinary connection failed:", error.message);
+}
+
 //middilware
 app.use(express.json())
 app.use(cors())
@@ -27,4 +40,9 @@ app.use('/api/order', orderRouter)
 app.get('/', (req, res) => {
   res.send("API is working")
 })
-app.listen(port, () => console.log(`Server is running on port ${port}`))
+
+if (process.env.NODE_ENV !== 'production') {
+  app.listen(port, () => console.log(`Server is running on port ${port}`));
+}
+
+export default app;
