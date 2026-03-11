@@ -40,6 +40,8 @@ app.use('/api/order', orderRouter)
 app.get('/', (req, res) => {
   res.send("API is working")
 })
+app.get('/favicon.png', (req, res) => res.status(204).end());
+app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 if (process.env.NODE_ENV !== 'production') {
   app.listen(port, () => console.log(`Server is running on port ${port}`));
