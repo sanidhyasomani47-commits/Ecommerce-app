@@ -14,20 +14,11 @@ import orderRouter from './routes/orderRoutes.js'
 //app config
 const app = express()
 const port = process.env.PORT || 4000
-const connectDBWithRetry = async () => {
-  try {
-    await connectdb();
-  } catch (error) {
-    console.error("MongoDB connection failed:", error.message);
-  }
-};
-connectDBWithRetry();
 
-try {
-  connectcloudinary();
-} catch (error) {
-  console.error("Cloudinary connection failed:", error.message);
-}
+connectdb();
+connectcloudinary();
+
+
 
 //middilware
 app.use(express.json())
