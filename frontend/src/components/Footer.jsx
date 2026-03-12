@@ -30,7 +30,7 @@ function Footer() {
       </div>
      <div>
             <hr/>
-            <p className='py-4 text-sm text-center'>Copyright 2024@ foraver.com-All Right Reserved</p>
+            <p className='py-4 text-sm text-center'>Copyright {new Date().getFullYear()} forever.com - All Rights Reserved</p>
         </div>
     </div>
   )
